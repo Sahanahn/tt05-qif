@@ -24,7 +24,7 @@ module tb ();
   wire spike_out;            // Spike output
 
 
-    QIFNeuron qif_neuron (
+    tt_um_QIFNeuron qif_neuron (
     .clk(clk),
     .rst(rst),
     .B(B),
