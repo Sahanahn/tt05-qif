@@ -19,7 +19,7 @@ module tb ();
     // wire up the inputs and outputs
   reg clk;               // Clock signal
   reg rst;               // Reset signal
-  reg [7:0] B;     // Input B set to -20
+  reg [7:0] B;     // Input B 
   wire [7:0] V;              // Output voltage
   wire spike_out;            // Spike output
 
