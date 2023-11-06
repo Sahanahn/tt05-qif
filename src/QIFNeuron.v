@@ -1,4 +1,4 @@
-module tt_um_QIFNeuron (
+module QIFNeuron (
   input wire clk,          // Clock input
   input wire rst_n,          // Reset input
   input wire [7:0] B, // Input B (8-bit, signed)
