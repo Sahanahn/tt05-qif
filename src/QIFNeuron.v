@@ -23,7 +23,7 @@ module QIFNeuron (
       Z1 <= 8'b0;
       Z2 <= 8'b0;
     end else begin
-      V_reg <= V_reg + B / 4 + (V_reg * V_reg / 16);  // Include the square term here
+      V_reg <= A *(V_reg + V_reg  *  V_reg + B); // Include the square term here
       spike_out_reg <= 1'b0;  // Set spike_out_reg to 0 when V < Vpeak
     end
   end
