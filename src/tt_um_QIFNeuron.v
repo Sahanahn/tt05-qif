@@ -7,7 +7,7 @@ module tt_um_QIFNeuron (
   output reg [7:0] V,     // Output voltage V (8-bit, signed)
   output reg spike_out    // Spike output
 );
-  wire ena;
+  inout wire ena;
   reg [7:0] Z1, Z2;        // Delay flip-flops
   wire [7:0] V_reset = -8'sd20; // Set Vreset to -20
   wire [7:0] Vpeak = 8'd50;  // Vpeak value (Set to 50)
