@@ -1,6 +1,6 @@
 `default_nettype none
 
-module QIFNeuron (
+module tt_um_QIFNeuron (
   input wire clk,          // Clock input
   input wire rst,          // Reset input
   input wire [7:0] B,      // Input B (8-bit, signed)
