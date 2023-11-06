@@ -56,4 +56,5 @@ module tt_um_QIFNeuron (
   // Assign spike_out_reg to spike_out (output wire)
   assign spike_out = spike_out_reg;
   assign V = Z2;
+  end
 endmodule
