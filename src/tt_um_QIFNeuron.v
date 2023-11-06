@@ -2,7 +2,7 @@
 
 module tt_um_QIFNeuron (
   input wire clk,          // Clock input
-  input wire rst,          // Reset input
+  input wire rst_n,          // Reset input
   input wire [7:0] B, // Input B (8-bit, signed)
   inout wire ena,
   output reg [7:0] V,     // Output voltage V (8-bit, signed)
@@ -17,8 +17,8 @@ module tt_um_QIFNeuron (
 
   // V computation
   reg [7:0] V_reg; // Intermediate register for V
-  always @(posedge clk or posedge rst) begin
-    if (rst) begin
+  always @(posedge clk or posedge rst_n) begin
+    if (rst_n) begin
       V_reg <= V_reset;
     end else if (V_reg >= Vpeak) begin
       V_reg <= V_reset;
@@ -32,8 +32,8 @@ module tt_um_QIFNeuron (
   end
 
   // Z flip-flops
-  always @(posedge clk or posedge rst) begin
-    if (rst) begin
+  always @(posedge clk or posedge rst_n) begin
+    if (rst_n) begin
       Z1 <= 8'b0;
       Z2 <= B;
     end else begin
@@ -42,8 +42,8 @@ module tt_um_QIFNeuron (
     end
   end
 // Spike output and reset logic
-  always @(posedge clk or posedge rst) begin
-    if (rst) begin
+  always @(posedge clk or posedge rst_n) begin
+    if (rst_n) begin
       spike_out_reg <= 1'b0;
     end else if (V_reg >= Vpeak) begin
       spike_out_reg <= 1'b1;
