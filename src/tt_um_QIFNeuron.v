@@ -4,8 +4,8 @@ module tt_um_QIFNeuron (
   input wire clk,          // Clock input
   input wire rst,          // Reset input
   input wire [7:0] B,      // Input B (8-bit, signed)
-  output wire [7:0] V,     // Output voltage V (8-bit, signed)
-  output wire spike_out    // Spike output
+  output reg [7:0] V,     // Output voltage V (8-bit, signed)
+  output reg spike_out    // Spike output
 );
   reg [7:0] Z1, Z2;        // Delay flip-flops
   wire [7:0] V_reset = -8'sd20; // Set Vreset to -20
