@@ -4,7 +4,7 @@ module tt_um_QIFNeuron (
   input wire clk,          // Clock input
   input wire rst,          // Reset input
   input wire [7:0] B, // Input B (8-bit, signed)
-  inout wire ena;
+  inout wire ena,
   output reg [7:0] V,     // Output voltage V (8-bit, signed)
   output reg spike_out    // Spike output
 );
