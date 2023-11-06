@@ -18,7 +18,7 @@ module tt_um_tb ();
 
     // wire up the inputs and outputs
  input reg clk;               // Clock signal
- input reg rst;               // Reset signal
+ input reg rst_n;               // Reset signal
  input reg [7:0] B;     // Input B 
  output wire [7:0] V;              // Output voltage
  output wire spike_out;            // Spike output
@@ -26,7 +26,7 @@ module tt_um_tb ();
 
     tt_um_QIFNeuron qif_neuron (
     .clk(clk),
-    .rst(rst),
+        .rst_n(rst_n),
     .B(B),
     .V(V),
     .spike_out(spike_out)
