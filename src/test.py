@@ -5,7 +5,7 @@ from cocotb.triggers import RisingEdge, FallingEdge, Timer, ClockCycles
 
 
 @cocotb.test()
-async def test_lif_neuron(dut):
+async def test_QIFNeuron(dut):
     dut._log.info("start")
     clock = Clock(dut.clk, 1, units="ms")
     cocotb.start_soon(clock.start())
