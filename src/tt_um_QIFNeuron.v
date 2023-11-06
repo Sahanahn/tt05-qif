@@ -1,61 +1,24 @@
 `default_nettype none
 
-module tt_um_QIFNeuron (
-  input wire clk,          // Clock input
-  input wire rst_n,          // Reset input
-  input wire [7:0] B, // Input B (8-bit, signed)
-  output reg [7:0] V,     // Output voltage V (8-bit, signed)
-  output reg spike_out    // Spike output
+module tt_um_seven_segment_seconds #( parameter MAX_COUNT = 24'd10_000_000 ) (
+    input  wire [7:0] ui_in,    // Dedicated inputs - connected to the input switches
+    output wire [7:0] uo_out,   // Dedicated outputs - connected to the 7 segment display
+    input  wire [7:0] uio_in,   // IOs: Bidirectional Input path
+    output wire [7:0] uio_out,  // IOs: Bidirectional Output path
+    output wire [7:0] uio_oe,   // IOs: Bidirectional Enable path (active high: 0=input, 1=output)
+    input  wire       ena,      // will go high when the design is enabled
+    input  wire       clk,      // clock
+    input  wire       rst_n     // reset_n - low to reset
 );
-  
-  reg [7:0] Z1, Z2;        // Delay flip-flops
-  wire [7:0] V_reset = -8'sd20; // Set Vreset to -20
-  wire [7:0] Vpeak = 8'd50;  // Vpeak value (Set to 50)
-  wire [7:0] A = 8'd32;      // Gain A (Set to 0.25)
- reg spike_out_reg;        // Spike output register
 
-  // V computation
-  reg [7:0] V_reg; // Intermediate register for V
-  always @(posedge clk or posedge rst_n) begin
-    if (rst_n) begin
-      V_reg <= V_reset;
-    end else if (V_reg >= Vpeak) begin
-      V_reg <= V_reset;
-      spike_out_reg <= 1'b1;  // Set spike_out_reg to 1 when V >= Vpeak
-      Z1 <= 8'b0;
-      Z2 <= 8'b0;
-    end else begin
-      V_reg <= V_reg + B / 4 + (V_reg * V_reg / 16);  // Include the square term here
-      spike_out_reg <= 1'b0;  // Set spike_out_reg to 0 when V < Vpeak
-    end
-  end
+   
+     QIFNeuron neuron (
+       .clk(clk),
+       .rst_n(rst_n),
+       .B(ui_in),
+       .V(uo_out),
+       .spike_out(uio_out)
+     );
 
-  // Z flip-flops
-  always @(posedge clk or posedge rst_n) begin
-    if (rst_n) begin
-      Z1 <= 8'b0;
-      Z2 <= B;
-    end else begin
-      Z1 <= B + Z2;
-      Z2 <= Z1;
-    end
-  end
-// Spike output and reset logic
-  always @(posedge clk or posedge rst_n) begin
-    if (rst_n) begin
-      spike_out_reg <= 1'b0;
-    end else if (V_reg >= Vpeak) begin
-      spike_out_reg <= 1'b1;
-      V_reg <= V_reset; 
-      Z1 <= 8'b0;
-      Z2 <= 8'b0;
-    end else begin
-      spike_out_reg <= 1'b0;
-    end
-  end
-
-  // Assign spike_out_reg to spike_out (output wire)
-  assign spike_out = spike_out_reg;
-  assign V = Z2;
-  
-endmodule
+   endmodule
+       
