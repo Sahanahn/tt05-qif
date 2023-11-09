@@ -19,6 +19,7 @@ module QIFNeuron (
     if (rst_n) begin
       V_reg <= V_reset;
       spike_out_reg <= 1'b0; // Initialize spike_out_reg to 0 on reset
+      Z1 <= 8'b0; // Initialize Z1 on reset
     end else if (V_reg >= Vpeak) begin
       V_reg <= V_reset;
       spike_out_reg <= 1'b1;  // Set spike_out_reg to 1 when V >= Vpeak
@@ -27,13 +28,13 @@ module QIFNeuron (
     end else begin
       V_reg <= A * (V_reg + V_reg * V_reg + B); // Include the square term here
       spike_out_reg <= 1'b0;  // Set spike_out_reg to 0 when V < Vpeak
+      Z1 <= B + Z2;
     end
   end
 
   // Z flip-flops
   always @(posedge clk or posedge rst_n) begin
     if (rst_n) begin
-      Z1 <= 8'b0;
       Z2 <= B;
     end else begin
       Z1 <= B + Z2;
