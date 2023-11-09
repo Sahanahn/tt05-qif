@@ -12,7 +12,7 @@ module tt_um_tb ();
     // this part dumps the trace to a vcd file that can be viewed with GTKWave
     initial begin
         $dumpfile ("tb.vcd");
-        $dumpvars (0, tb);
+        $dumpvars (0, tt_um_tb);
         #1;
     end
 
