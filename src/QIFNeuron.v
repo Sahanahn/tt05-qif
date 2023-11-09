@@ -32,15 +32,7 @@ module QIFNeuron (
     end
   end
 
-  // Z flip-flops
-  always @(posedge clk or posedge rst_n) begin
-    if (rst_n) begin
-      Z2 <= B;
-    end else begin
-      Z1 <= B + Z2;
-      Z2 <= Z1;
-    end
-  end
+  
 
   // Assign spike_out_reg to spike_out (output wire)
   assign spike_out = spike_out_reg;
