@@ -12,15 +12,13 @@ module tt_um_QIFNeuron  (
 );
 
     assign uio_oe = 8'b00000001;
-    assign uio_out[7:1] = 7'd0;
+    assign uio_out = 8'b00000000;
    
      QIFNeuron neuron (
        .clk(clk),
        .rst_n(rst_n),
        .B(ui_in),
-       .V(uo_out),
-       .spike_out(uio_out[0])
-     );
+       .V(uo_out));
 
    endmodule
        
