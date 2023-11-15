@@ -9,7 +9,7 @@ module QIFNeuron (
   reg [7:0] Z1, Z2;        // Delay flip-flops
   wire [7:0] V_reset = -8'sd20; // Set Vreset to -20
   wire [7:0] Vpeak = 8'd50;  // Vpeak value (Set to 50)
-  wire [7:0] A = 8'd32;      // Gain A (Set to 0.25)
+  
 
   reg spike_out_reg;       // Spike output register
 
@@ -26,9 +26,9 @@ module QIFNeuron (
       Z1 <= 8'b0;
       Z2 <= 8'b0;
     end else begin
-      V_reg <= A * (V_reg + V_reg * V_reg + B); // Include the square term here
+       V_reg <= V_reg + ((V_reg / 8) * (V_reg / 8)) * (B / 4);
       spike_out_reg <= 1'b0;  // Set spike_out_reg to 0 when V < Vpeak
-      Z1 <= B + Z2;
+      Z2 <= B + Z1;
     end
   end
  // Assign spike_out_reg to spike_out (output wire)
