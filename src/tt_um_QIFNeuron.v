@@ -19,7 +19,7 @@ module tt_um_QIFNeuron  (
        .rst_n(rst_n),
        .B(ui_in),
        .V(uo_out),
-       .spike_out(uio_out[0])
+       
      );
 
    endmodule
