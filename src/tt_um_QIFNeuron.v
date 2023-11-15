@@ -11,8 +11,7 @@ module tt_um_QIFNeuron  (
     input  wire       rst_n     // reset_n - low to reset
 );
 
-    assign uio_oe = 8'b00000001;
-    assign uio_out[7:1] = 7'd0;
+    
    
      QIFNeuron neuron (
        .clk(clk),
