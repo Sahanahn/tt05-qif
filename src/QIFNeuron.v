@@ -18,7 +18,7 @@ module QIFNeuron (
   always @(posedge clk or posedge rst_n) begin
     if (rst_n) begin
       V_reg <= V_reset;
-    end else if (V_mem >= V_th) begin
+    end else if (V_mem >= V_peak) begin
       V_reg <= V_reset;
     end else begin
       V_reg <= V_reg + ((V_reg / 8) * (V_reg / 8)) * (B / 4); // Integrate the synaptic current
