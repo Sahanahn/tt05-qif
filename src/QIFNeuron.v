@@ -21,7 +21,7 @@ module QIFNeuron (
     end else if (V_mem >= V_th) begin
       V_reg <= V_reset;
     end else begin
-      V_reg <= V_reg +  (V_reg/8)*(V_reg/8) B/4; // Integrate the synaptic current
+      V_reg <= V_reg + ((V_reg / 8) * (V_reg / 8)) * (B / 4); // Integrate the synaptic current
     end
   end
 
