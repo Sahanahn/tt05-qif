@@ -18,7 +18,7 @@ module tt_um_QIFNeuron  (
        .clk(clk),
        .rst_n(rst_n),
        .B(ui_in),
-       .V(uo_out),);
+       .V(uo_out));
 
    endmodule
        
