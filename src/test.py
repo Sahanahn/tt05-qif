@@ -17,7 +17,7 @@ async def test_QIFNeuron(dut):
     # take the design out of reset
     dut.rst_n.value = 1
    
-    dut.ui_in.value = 1
+    dut.ui_in.value = 4
     # go to the beta state
     
     # now set the value of threshold
@@ -28,7 +28,7 @@ async def test_QIFNeuron(dut):
     await ClockCycles(dut.clk, 50)
     
     # set the value of beta
-    dut.ui_in.value = 2
+    
    
     
    
