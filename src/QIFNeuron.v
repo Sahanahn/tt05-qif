@@ -15,20 +15,13 @@ module QIFNeuron (
   // V computation
   reg [7:0] V_reg; // Intermediate register for V
  
- always @(posedge clk or posedge rst_n) begin
-    if (rst_n) begin
+ always @(posedge clk or posedge rst_n) 
+   if (rst_n | V_mem >= V_peak) begin
         V_reg <= V_reset;
-    end else begin
-        if (V_mem >= V_peak) begin
-            V_reg <= V_reset;
-        end else begin
+            end else begin
             // Integrate the synaptic current
             V_reg <= V_reg + ((V_reg / 8) * (V_reg / 8)) * (B / 4);
         end
-    end
-end
-
-
-  assign V = V_reg;
+     assign V = V_reg;
 
 endmodule
