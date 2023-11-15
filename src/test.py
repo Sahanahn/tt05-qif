@@ -27,15 +27,8 @@ async def test_QIFNeuron(dut):
     dut.ui_in.value = 20
     await ClockCycles(dut.clk, 50)
     
-    # set the value of beta
-    
-   
-    
-   
     dut.ui_in.value = 128
     await ClockCycles(dut.clk, 5)
    
-   
-    
     dut.ui_in.value = 100
     await ClockCycles(dut.clk, 15)
